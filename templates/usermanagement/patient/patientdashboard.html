@@ -1,0 +1,659 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-r0X2EltGRJuqZwF0ufG5v8aAW63q4QgU1OALFQ/zhaXBJgJUP9soA0YH1odE5AIamfYaHrJIVa9fzRUjz21i8Q==" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+    rel="stylesheet"
+  />
+  <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+></script>
+
+    <title>hello Patient</title>
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Calibri:400,300,700);
+    .flex {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto
+    }
+    .navbar-nav li a:hover{
+        color: #08a3fd;
+        /*border-bottom: 2px solid #08a3fd;*/
+        transition: 100ms ease-in-out all;
+        box-sizing: border-box;
+
+    }
+    footer .foote li a:hover{
+        color: #08a3fd;
+        transition: 200ms ease-in-out all;
+     }
+    
+    @media (max-width:991.98px) {
+        .padding {
+            padding: 1.5rem
+        }
+    }
+    
+    @media (max-width:767.98px) {
+        .padding {
+            padding: 1rem
+        }
+    }
+    
+    .padding {
+        padding: 5rem
+    }
+    
+    .card {
+        background: #161414;
+        border-width: 0;
+        border-radius: .25rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+        margin-bottom: 1.5rem
+    }
+    
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(19,24,44,.125);
+        border-radius: .25rem;
+    }
+    
+    .card-header {
+        padding: .75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: rgba(19,24,44,.03);
+        border-bottom: 1px solid rgba(19,24,44,.125);
+    }
+    
+    .card-header:first-child {
+        border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    }
+    
+    card-footer, .card-header {
+        background-color: transparent;
+        border-color: rgba(160,175,185,.15);
+        background-clip: padding-box;
+    }
+    body {
+        background-color: #eee;
+        font-family: 'Calibri', sans-serif !important;
+    }
+    
+    .mt-100{
+       margin-top:70px;
+    
+    }
+    
+    .card {
+        margin-bottom: 30px;
+        border: 0px;
+        border-radius: 0.25rem;
+        box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+        padding-bottom: 5rem;
+    }
+    
+    .card .card-body {
+        padding: 1.88rem 1.81rem;
+    }
+    
+    .table thead th {
+        border-bottom: none;
+        border-top: none;
+        vertical-align: middle;
+    }
+    
+    
+    .table th, .table td {
+        padding: 1rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+    
+    .progress{
+        
+            margin-top: 6px;
+    }
+    #chat-area{
+        height: 300px;
+        width: 20%;
+        float:right;
+        position:fixed;
+        right: 5%;
+        box-shadow: 0px 0px 3px 3px rgba(45, 45, 45, 0.295);
+        border-radius: 10px;
+        background-color: #fff;
+        top:10%;
+        visibility:hidden;
+        padding: 2rem;
+    }
+    #chat-area h3{
+       background-color: darkgray;
+       color: white;
+       width: 70%;
+       position: absolute;
+       right: 5px;
+       top:3%;
+       font-size: small;
+       text-align: center;
+       padding-bottom: 3%;
+       padding-top: 3%;
+       border-radius: 10px;
+       animation: colorgame 10s infinite linear;
+    }
+   
+    #chat-area img{
+        position: absolute;
+        left:5px;
+        top:5px;
+    }
+    #chtaing{
+        width: 100%;
+        height: 60%;
+        position: absolute;
+        top:15%;
+        bottom: 0;
+        
+        padding: 2rem;
+    }
+    form{
+        position: absolute;
+        background-color:#fff;
+        right:2.5%;
+        bottom: 0px;
+        width: 95%;
+    }
+    form i{
+        vertical-align:-80%;
+        color:rgb(0, 191, 255);
+    }
+    #file{
+        width:14px;
+        height:14px;
+        position: absolute;
+        left: 11%;
+        opacity: 0;
+    }
+    
+    #msg{
+        width: 60%;
+        padding-bottom: 30px;
+        border:0.2px solid darkgray;
+        margin-bottom: 1%;
+        border-radius: 10px;
+    }
+    #msg:focus{
+       outline:0.3px solid rgb(0, 191, 255);
+       transition: 1s ;
+    }
+
+    #msgicon{
+     font-size:70px;
+     color: rgb(0, 191, 255);
+    }
+    #but{
+        border: 0px;
+        background-color: rgba(236, 238, 239, 0);
+        position: fixed;
+        right:5%;
+        top:75%;
+    }
+    
+    #close{
+        visibility:hidden ;
+        position: fixed;
+        right:5%;
+        top:60%;
+        font-size: 50px;
+        color:white;
+        background-color: rgb(0, 191, 255,0.8);
+        border-radius: 200px;
+        width:5%;
+        
+    }
+    @keyframes rotation2{
+        from{
+            transform: rotate(0deg);
+        }
+        to{
+            transform: rotate(-360deg);
+        }
+    }
+    
+  
+</style>
+<body>
+   <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light position-fixed top-0 w-100 z-3 mb-5">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <img
+            src="{% static 'assets\img\healthtech icon.svg' %}"
+            height="35"
+            alt=" Logo"
+            loading="lazy"
+          />
+          <h3 style="color: #08a3fd;">HealthTech</h3>
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav   w-100 d-flex flex-row justify-content-center align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Doctor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About_VitalSigns</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+     
+        <!-- Notifications -->
+    
+        <!-- Avatar -->
+        <div class="dropdown  mr-5">
+          <a
+            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+            style="margin-right: 5rem;"
+          >
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              class="rounded-circle  mr-5"
+              height="35"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+            />
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuAvatar"
+          >
+            <li>
+              <a class="dropdown-item" href="#">My profile</a>
+            </li>
+            <!-- <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li> -->
+            <li>
+              <a class="dropdown-item" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+  <div class="container-fluid  mt-100 p-3">
+					
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="active-member">
+                    <div class="table-responsive">
+                        <table class="table table-xs mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="d-flex justify-content-center align-items-center flex-column">  <span style="text-align: center;"> blood_pressure(mmhg)</span>
+                                    <span> Upper Number|Down Number</span> 
+                                    </th>
+                                    <th>heart_rate(hr/min)</th>
+                                    <th>respiratory_rate(breaths/min)</th>
+                                    <th>temperature(C°)</th>
+                                    <th>oxygen_saturation(%)</th>
+                                    <th>pain_level</th>
+                                    <th>date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;"> 12 | 8</td>
+                                    <td>70</td>
+                                    <td>
+                                        <span>23432</span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-center d-flex justify-content-center align-items-center">35</span></td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td> <span class="m-0 pl-3">27/Jun/2023 11:30:20</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"> 12 | 8</td>
+                                    <td>70</td>
+                                    <td><span>33243</span></td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 50%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-center d-flex justify-content-center align-items-center">35</span></td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td> <span class="m-0 pl-3">27/Jun/2023 11:30:20</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"> 12 | 8</td>
+                                    <td>70</td>
+                                    <td><span>34434</span></td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-warning" style="width: 100%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-center d-flex justify-content-center align-items-center">35</span></td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td> <span class="m-0 pl-3">27/Jun/2023 11:30:20</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"> 12 | 8</td>
+                                    <td>70</td>
+                                    <td><span>32443</span></td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 20%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-center d-flex justify-content-center align-items-center">35</span> </td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td> <span class="m-0 pl-3">27/Jun/2023 11:30:20</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"> 12 | 8</td>
+                                    <td>70</td>
+                                    <td><span>23323</span></td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 90%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-center d-flex justify-content-center align-items-center">35</span></td>
+                                    <td>
+                                        <div>
+                                            <div class="progress" style="height: 6px">
+                                                <div class="progress-bar bg-primary" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td> <span class="m-0 pl-3">27/Jun/2023 11:30:20</span></td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>                        
+    </div>
+</div>
+
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+      var ctx = $("#chart-line");
+      var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+              datasets: [{
+                data: [12.8, 15.8, 13.9, 14.8, 15.9, 11.9, 12.8, 13.8, 13.9, 12.8],
+                label: "blood_pressure",
+                borderColor: "#08a3fd",
+                fill: false
+            }, {
+                data: [ 0.3, 0.5, 0.6, 14.8, 15.9, 11.9, 12.8, 13.8,20,20],
+                label: "oxygen_saturation",
+                borderColor: "#8e5ea2",
+                fill: false
+            }, {
+                data: [20, 30, 10, 2, 3, 5, 25, 13, 15, 15],
+                label: "pain_level",
+                borderColor: "#3cba9f",
+                fill: false
+            }]
+            
+          },
+          options: {
+              title: {
+                  display: true,
+                  text: 'Your Vital Signs  in Months'
+              }
+          }
+      });
+  });
+  
+ 
+
+  $(document).ready(function() {
+    var ctx = $("#chart-line2");
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Normal Situation', 'Danger Situation', 'Situation Requiring Doctor'],
+            datasets: [{
+                data: [86, 282, 168],
+                backgroundColor: ["#08a3fd", "#8e5ea2", "#3cba9f"],
+                hoverBackgroundColor: ["#08a3fd", "#8e5ea2", "#3cba9f"]
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Vital Signs Evaluation'
+            }
+        }
+    });
+});
+    
+  </script>
+  
+
+<div class="page-content page-container d-flex flex-row" id="page-content">
+   <div class="padding w-50">
+      <div class="row ">
+          <div class="container-fluid d-flex justify-content-center">
+         <div class="col-sm-8 col-md-12">
+            <div class="card">
+               
+               <div class="card-body" style="height: 420px">
+                  <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                     <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                     </div>
+                     <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                     </div>
+                  </div>
+                  <canvas id="chart-line" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+               </div>
+            </div>
+         </div>
+         </div>
+      </div>
+    </div>
+    <div class="padding w-50">
+      <div class="row ">
+          <div class="container-fluid d-flex justify-content-center ">
+         <div class="col-sm-8 col-md-12">
+            <div class="card">
+               
+               <div class="card-body" style="height: 420px">
+                  <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                     <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                     </div>
+                     <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                     </div>
+                  </div>
+                  <canvas id="chart-line2" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
+               </div>
+            </div>
+         </div>
+         </div>
+      </div>
+    </div>
+</div>   
+
+<!-- <div class="page-content page-container" id="page-content">
+  
+ </div>    -->
+ <div class="container bg-white w-100 d-flex flex-column align-items-center justify-content-around mb-4" style="border-radius: 15px; box-shadow: 0px -0px 2px 2px rgba(0, 0, 0, 0.148);">
+    <footer class="py-3 my-4 w-100 d-flex flex-column align-items-center">
+        <div class="logo   d-flex flex-row  align-items-center justify-content-around">   <a class="navbar-brand2 mt-2 mt-lg-0 d-flex flex-row" href="#">
+            <img
+              src="{% static 'assets\img\healthtech icon.svg' %}"
+              height="35"
+              alt=" Logo"
+              loading="lazy"
+              class=""
+            />
+            <h3 class="" style="color: #08a3fd;">HealthTech</h3>
+          </a></div>
+      <ul class="nav  justify-content-center border-bottom pb-3 mb-3 w-100 foote">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Dashboard</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contact Doctor</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About_VitalSigns</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Log-out</a></li>
+      </ul>
+      <p class="text-center text-muted">© 2023 HealthTech, univ-costantine2</p>
+    </footer>
+  </div>
+  <div  id="chat-area">
+    <img
+    src="{% static 'assets\img\doctors\cartoon-cute-young-doctor-waving_70172-2682.avif' %}"
+    height="48"
+    width="48"
+    alt=" Logo"
+    loading="lazy"
+    class=""
+  /><h3 style="background-color: #08a3fd;" >Contact A doctor</h3>
+    <section id="chtaing"></section>
+    <form action="" method="post">
+       </i> <i class="fa fa-image"><input type="file" accept="image/* , video/*" multiple id="file"></i> <input type="text" placeholder="Write your Problrm here ...." minlength="1" maxlength="500" id="msg">
+<i class="fa fa-send"></i>
+</form>
+</div>
+<button id="but"><i class="fa fa-close" id="close"></i><i class="fa fa-commenting" id="msgicon"></i></button>
+<script>
+    var button = document.getElementById("msgicon");
+var chat =document.getElementById("chat-area");
+var closing =document.getElementById("close");
+var chatarea = document.getElementById("chtaing");
+
+
+button.addEventListener("click",sendingmsg);
+closing.addEventListener("click",closingmsg);
+function sendingmsg(){
+    if(button.style.visibility="visible"){
+    chat.style.visibility="visible";
+    closing.style.visibility="visible";
+    closing.style.animation="rotation2 2s infinite";
+    button.style.visibility="hidden";
+    }
+    
+}
+function closingmsg(){
+    chat.style.visibility="hidden";
+    button.style.visibility="visible";
+    closing.style.visibility="hidden";
+}
+
+window.onscroll=function(){
+    scrollFunction()
+};
+</script>
+</body>
+</html>
